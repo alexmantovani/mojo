@@ -1,0 +1,23 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Icone
+//@import "node_modules/font-awesome/scss/font-awesome";
+
+
+.tag {
+    background-color: #ff0000;
+    padding: 1px 7px 1px 7px;
+    border-radius: 5px;
+}
+
+.bootstrap-tagsinput {
+    width: 591px;
+
+}
