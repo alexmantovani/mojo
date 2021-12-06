@@ -16,13 +16,9 @@ class Issue extends Model
         return $this->belongsTo('App\User');
     }
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status');
-    // }
-
-    public function attachments() {
-        return $this->hasMany(AttachmentIssue::class);
+    public function attachments()
+    {
+        return $this->morphMany('App\Attachment', 'attachable');
     }
 
     public function tags() {

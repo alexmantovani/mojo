@@ -20,9 +20,6 @@ class IssueTest extends TestCase
         parent::setUp();
 
         factory(Issue::class)->create();
-
-        // $this->seed(CourseTableSeeder::class);
-        // $this->playerRounds = app()->make(PlayerRounds::class);
     }
 
     /**
@@ -56,6 +53,7 @@ class IssueTest extends TestCase
         $this->assertEquals( count($unsolved), 1 );
     }
 
+    /** @test */
     public function testUnsolvedIssues()
     {
         $unsolved = \App\Issue::doesntHave('Solutions')->get();

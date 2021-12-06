@@ -10,8 +10,12 @@ class Solution extends Model
         'user_id', 'description'
     ];
 
-    public function attachments() {
-        return $this->hasMany(AttachmentSolution::class);
+    // public function attachments() {
+    //     return $this->hasMany(AttachmentSolution::class);
+    // }
+    public function attachments()
+    {
+        return $this->morphMany('App\Attachment', 'attachable');
     }
 
     public function user()

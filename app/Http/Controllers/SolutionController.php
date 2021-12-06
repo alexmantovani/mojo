@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Solution;
 use App\Issue;
 use Auth;
-use App\AttachmentSolution;
+use App\Attachment;
 use Illuminate\Support\Str;
 
 class SolutionController extends Controller
@@ -60,22 +60,21 @@ class SolutionController extends Controller
         $files = $request->file('attachment');
 
         if ( $files != NULL ) {
-    //    if ($request->hasFile('attachment')) {
             foreach ($files as $file) {
                 $filename = Str::random(32);
 
                 // Salvo l'immagine
                 //$imagePath = $file->store('uploads', 'public');
                 $path = $file->storeAs('uploads', $filename, 'public');
-                $attachment = AttachmentSolution::create([
+
+                $solution->attachments()->create([
                     'file_name' => $filename,
-                    'solution_id' => $solution->id,
+                    'mime_type' => $file->getClientMimeType(),
                     'original_name' => $file->getClientOriginalName(),
                 ]);
             }
         }
 
-        // return view('/home');
         return redirect()->action([HomeController::class, 'index']);
     }
 
