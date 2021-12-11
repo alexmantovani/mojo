@@ -8,6 +8,7 @@ use App\Issue;
 use Auth;
 use App\Attachment;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class SolutionController extends Controller
 {
@@ -67,11 +68,19 @@ class SolutionController extends Controller
                 //$imagePath = $file->store('uploads', 'public');
                 $path = $file->storeAs('uploads', $filename, 'public');
 
-                $solution->attachments()->create([
+                $attachment = $solution->attachments()->create([
                     'file_name' => $filename,
                     'mime_type' => $file->getClientMimeType(),
                     'original_name' => $file->getClientOriginalName(),
                 ]);
+
+                // Se è un'immagine creo la miniatura
+                if ( $attachment->isAnImage() ) {
+                    $image = Image::make(public_path('storage/uploads/' . $attachment->file_name))->resize(600, 400, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image->save(public_path("storage/thumbs/" . $attachment->file_name));
+                }        
             }
         }
 

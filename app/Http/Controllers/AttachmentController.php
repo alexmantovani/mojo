@@ -82,4 +82,18 @@ class AttachmentController extends Controller
     {
         //
     }
+
+    public function open(Attachment $attachment)
+    {
+        $file_path = public_path("/storage/uploads/" . $attachment->file_name);
+        return response()->file($file_path, [
+            'Content-Type' => $attachment->mime_type
+        ]);
+    }
+
+    public function download(Attachment $attachment)
+    {
+        $file_path = public_path("/storage/uploads/" . $attachment->file_name);
+        return response()->download($file_path);
+    }
 }

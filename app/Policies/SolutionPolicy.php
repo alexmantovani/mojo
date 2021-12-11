@@ -20,8 +20,9 @@ class SolutionPolicy
         //
     }
 
-    public function update(User $user, Solution $solution)
+    // public function update(User $user, Solution $solution)
+    public function update(User $user, $item)
     {
-        return $user->id == $solution->user_id;
+        return $user->id == $item->user_id;
     }
 }

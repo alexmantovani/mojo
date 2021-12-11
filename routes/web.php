@@ -27,7 +27,8 @@ Route::post('/solutions/{id}/like', 'VoteController@likeSolution');
 Route::post('/solutions/{id}/dislike', 'VoteController@dislikeSolution');
 
 
-Route::get('/download/{file}', 'DownloadsController@download');
+Route::get('/attachment/{attachment}/download', 'AttachmentController@download');
+Route::get('/attachment/{attachment}/open', 'AttachmentController@open');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

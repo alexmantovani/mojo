@@ -65,25 +65,18 @@
 
                                 <div class="row pt-5">
                                     @foreach ($issue->attachments()->get() as $attachment)
-                                        @if (strpos($attachment->mime_type, 'image') === 0)
-                                            <div class="col-4">
-                                                @if (strpos(Storage::mimeType('public/uploads/' . $attachment->file_name), 'image') === 0)
-                                                    <img src={{ '/storage/thumbs/' . $attachment->file_name }}
-                                                        style="max-height: 250px;">
-                                                @else
-                                                    icona download
-                                                    {{-- {{ strpos(Storage::mimeType('/storage/' . $attachment->file_name), 'image') }} --}}
-                                                @endif
-                                            </div>
-                                        @else
-                                            <a href="/download/{{$attachment->file_name}}">
-                                                <img src={{ '/images/file_download.png' }} style="max-height: 42px;">
-                                                <div class="pt-2">
-                                                    {{$attachment->file_name}}
-                                                    {{ $attachment->original_name }}
-                                                </div>
-                                            </a>
-                                        @endif
+                                        <a href="/attachment/{{ $attachment->id }}/open">
+                                            @if ($attachment->isAnImage())
+                                                <img src={{ '/storage/thumbs/' . $attachment->file_name }}
+                                                    style="max-height: 250px;">
+                                            @else
+                                                {{-- Non si tratta di una immagine --}}
+                                                {{ $attachment->original_name }}
+                                            @endif
+                                        </a>
+                                        <a href="/attachment/{{ $attachment->id }}/download">
+                                            <img src={{ '/images/file_download.png' }} style="max-height: 34px;">
+                                        </a>
                                     @endforeach
                                 </div>
 
@@ -116,59 +109,48 @@
 
 
                                     <td>
-
-
+                                        {{-- Risposta --}}
                                         <div class="">
                                             {!! App\MarkdownParser::parse($solution->description) !!}
                                         </div>
 
-                                        <div class="row pt-1">
+                                        {{-- Attachmemnt --}}
+                                        <div class="pt-1">
                                             @foreach ($solution->attachments()->get() as $attachment)
-                                                <div class="card" style="width: 18rem;">
-                                                    {{-- <img src="{{ '/storage/' . $attachment->file_name }}" class="card-img-top"> --}}
-                                                    <img src="{{ asset('public/storage/uploads/' . $attachment->file_name) }}"
-                                                        class="card-img-top">
-                                                    <div class="card-body">
-                                                        {{-- <h5 class="card-title">Card title</h5> --}}
-                                                        <a href="#" class="card-link">Open</a>
-                                                        <a href="/download/{{ $attachment->file_name }}"
-                                                            class="card-link">Download</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                                {{-- <div class="col-4">
-                                                @if (strpos(Storage::mimeType('public/' . $attachment->file_name), 'image') === 0)
-                                                    {{-- <img src={{ '/storage/thumbs/' . $attachment->file_name }} style="max-height: 250px;"> --}}
-                                                {{-- <img src={{ '/storage/' . $attachment->file_name }} style="max-height: 250px;">
-                                                @else
-
-                                                    {{ strpos(Storage::mimeType('/storage/' . $attachment->file_name), 'image') }}
-                                                @endif
-                                            </div> --}}
+                                                <a href="/attachment/{{ $attachment->id }}/open">
+                                                    @if ($attachment->isAnImage())
+                                                        <img src={{ '/storage/thumbs/' . $attachment->file_name }}
+                                                            style="max-height: 250px;">
+                                                    @else
+                                                        {{-- Non si tratta di una immagine --}}
+                                                        {{ $attachment->original_name }}
+                                                    @endif
+                                                </a>
+                                                <a href="/attachment/{{ $attachment->id }}/download">
+                                                    <img src={{ '/images/file_download.png' }} style="max-height: 34px;">
+                                                </a>
                                             @endforeach
                                         </div>
 
 
-
-
                                         <div class="d-flex justify-content-between">
+                                            {{-- Data e utente --}}
                                             <div class="pb-5 pt-1" style="color: #999999">
                                                 Answered
                                                 {{ \Carbon\Carbon::parse($solution->created_at)->diffForHumans() }} -
                                                 {{ $solution->user->name }}
                                             </div>
+                                            {{-- Edit / Delete --}}
                                             @can('update', $solution)
-                                                <div class="pb-3" style="color: #999999">
-                                                    {{-- <button type="button" class="btn btn-outline-danger btn-sm mr-2" style="min-width:70px;">Edit</button> --}}
-                                                    {{-- <button type="button" class="btn btn-outline-danger btn-sm mr-2 deletebtn" id={{ $solution->id }} style="min-width:70px;">Remove</button> --}}
-                                                    Edit&nbsp;&nbsp; |&nbsp;&nbsp;
-                                                    {{-- <a data-method="DELETE" href="/solutions/{{ $solution->id }}" rel="nofollow">Delete</a> --}}
-                                                    <delete-solution solution-id="{{ $solution->id }}"></delete-solution>
+                                                <div class="pb-3 d-flex" style="color: #999999">
+                                                    <div class="pr-3">
+                                                        <a href="">Edit</a>
+                                                    </div>
+                                                    |
+                                                    <delete-solution solution-id="{{ $solution->id }}"
+                                                        class="pl-3"></delete-solution>
                                                 </div>
                                             @endcan
-
                                         </div>
                                     </td>
 
@@ -200,7 +182,7 @@
                             is-invalid
                         @enderror"
                             name="description" value="{{ old('description') }}" required autocomplete="description">
-                                    </textarea>
+                                                    </textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -223,20 +205,8 @@
                     </div>
                 </form>
 
-
-
             </div>
         </div>
-        {{-- <script>
-    $(document).on('click', 'deletebtn', function() {
-        var $id = $(this).attr("id");
-        if (confirm("Delete")) {
-
-        }
-    })
-
-</script> --}}
-
 
     </div>
 
