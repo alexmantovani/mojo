@@ -21,7 +21,7 @@ export default {
 
     methods: {
         deleteSolution() {
-            axios.delete('/solutions/' + this.solutionId)
+            axios.delete('solutions/' + this.solutionId)
             .then( response => {
                 //this.delta = 1;
                 // this.status = ! this.status;

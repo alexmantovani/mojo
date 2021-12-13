@@ -133,6 +133,6 @@ class SolutionController extends Controller
         $solution = Solution::findOrFail( $id );
         $solution->delete();
 
-        return view('/issues/' . $solution->issue_id);
+        return view('issues/' . $solution->issue_id);
     }
 }

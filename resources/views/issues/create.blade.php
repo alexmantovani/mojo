@@ -6,22 +6,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
-
-
-
-
-
-
-
-
 @endsection
 
 
 
 @section('content')
     <div class="container">
-
-        <form method="POST" action="/store" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('issues.store') }}" enctype="multipart/form-data">
             <div class="row col-10 offset-2">
                 @csrf
 
@@ -43,8 +34,6 @@
                         @enderror
                     </input>
                 </div>
-
-
 
                 <div class="row col-md-10">
                     <label for="description" class="col-md-4 col-form-label">{{ __('Description') }}</label>

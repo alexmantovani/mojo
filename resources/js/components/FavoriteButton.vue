@@ -20,7 +20,7 @@ export default {
 
     methods: {
         favoriteIssue() {
-            axios.post('/favorite/' + this.issueId)
+            axios.post(this.issueId + '/favorite')
             .then( response => {
                 this.status = ! this.status;
                 console.log(response.data);
@@ -30,7 +30,7 @@ export default {
 
     computed: {
         imageLink() {
-            return (this.status) ? "/svg/favorite.svg" : "/svg/not-favorite.svg";
+            return (this.status) ? "svg/favorite.svg" : "svg/not-favorite.svg";
         }
     }
 }

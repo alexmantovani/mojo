@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Favorites
-Route::post('/favorite/{issue}', 'FavoriteController@store');
+Route::post('/issues/{issue}/favorite', 'FavoriteController@store');
 
 // Votes
 Route::post('/issues/{issue}/like', 'VoteController@likeIssue');
@@ -36,7 +36,7 @@ Route::get('/search', 'HomeController@index')->name('search');
 
 // Issues
 Route::get('/issues', 'IssueController@index')->name('issues');
-Route::post('/store', 'IssueController@store');
+Route::post('/issues/store', 'IssueController@store')->name('issues.store');
 Route::get('/issues/create', 'IssueController@create')->name('new_issue');
 Route::get('/issues/{issue}', 'IssueController@show');
 

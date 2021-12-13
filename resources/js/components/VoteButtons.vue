@@ -33,7 +33,6 @@ export default {
             axios.post('/' + this.type + '/' + this.issueId + '/like')
             .then( response => {
                 this.delta = 1;
-                // this.status = ! this.status;
                 console.log(response.data);
             });
         },
@@ -41,7 +40,6 @@ export default {
             axios.post('/' + this.type + '/' + this.issueId + '/dislike')
             .then( response => {
                 this.delta = -1;
-                // this.status = ! this.status;
                 console.log(response.data);
             });
         }

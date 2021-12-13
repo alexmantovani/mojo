@@ -65,7 +65,7 @@
 
                                 <div class="row pt-5">
                                     @foreach ($issue->attachments()->get() as $attachment)
-                                        <a href="/attachment/{{ $attachment->id }}/open">
+                                        <a href="attachment/{{ $attachment->id }}/open">
                                             @if ($attachment->isAnImage())
                                                 <img src={{ '/storage/thumbs/' . $attachment->file_name }}
                                                     style="max-height: 250px;">
@@ -74,7 +74,7 @@
                                                 {{ $attachment->original_name }}
                                             @endif
                                         </a>
-                                        <a href="/attachment/{{ $attachment->id }}/download">
+                                        <a href="attachment/{{ $attachment->id }}/download">
                                             <img src={{ '/images/file_download.png' }} style="max-height: 34px;">
                                         </a>
                                     @endforeach
@@ -117,7 +117,7 @@
                                         {{-- Attachmemnt --}}
                                         <div class="pt-1">
                                             @foreach ($solution->attachments()->get() as $attachment)
-                                                <a href="/attachment/{{ $attachment->id }}/open">
+                                                <a href="attachment/{{ $attachment->id }}/open">
                                                     @if ($attachment->isAnImage())
                                                         <img src={{ '/storage/thumbs/' . $attachment->file_name }}
                                                             style="max-height: 250px;">
@@ -126,7 +126,7 @@
                                                         {{ $attachment->original_name }}
                                                     @endif
                                                 </a>
-                                                <a href="/attachment/{{ $attachment->id }}/download">
+                                                <a href="attachment/{{ $attachment->id }}/download">
                                                     <img src={{ '/images/file_download.png' }} style="max-height: 34px;">
                                                 </a>
                                             @endforeach
@@ -173,7 +173,7 @@
                     </h4>
                 </div>
 
-                <form method="POST" action="/issues/{{ $issue->id }}/solutions/store" enctype="multipart/form-data">
+                <form method="POST" action="issues/{{ $issue->id }}/solutions/store" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-10">
                         <textarea rows="6" cols="80" id="description" type="description"

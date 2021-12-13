@@ -48,7 +48,7 @@
                                 <td>
                                     <div class="">
                                         <h4>
-                                            <a href="/issues/{{ $issue->id }}">
+                                            <a href="issues/{{ $issue->id }}">
                                                 {{ $issue->title }}
                                             </a>
                                         </h4>

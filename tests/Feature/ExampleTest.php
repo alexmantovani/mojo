@@ -13,7 +13,7 @@ class ExampleTest extends TestCase
         $response = $this->get( route('new_issue') );
         $response->assertStatus(302);
 
-        $response = $this->get( "/issues/create" );
+        $response = $this->get( "issues/create" );
         $response->assertStatus(302);
     }
 

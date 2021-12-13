@@ -1926,7 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteSolution: function deleteSolution() {
-      axios["delete"]('/solutions/' + this.solutionId).then(function (response) {
+      axios["delete"]('solutions/' + this.solutionId).then(function (response) {
         //this.delta = 1;
         // this.status = ! this.status;
         console.log(response.data);
@@ -1957,6 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['issueId', 'favorite'],
   mounted: function mounted() {
@@ -1971,7 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
     favoriteIssue: function favoriteIssue() {
       var _this = this;
 
-      axios.post('/favorite/' + this.issueId).then(function (response) {
+      axios.post(this.issueId + '/favorite').then(function (response) {
         _this.status = !_this.status;
         console.log(response.data);
       });
@@ -1979,7 +1980,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     imageLink: function imageLink() {
-      return this.status ? "/svg/favorite.svg" : "/svg/not-favorite.svg";
+      return this.status ? "svg/favorite.svg" : "svg/not-favorite.svg";
     }
   }
 });
@@ -2025,8 +2026,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/' + this.type + '/' + this.issueId + '/like').then(function (response) {
-        _this.delta = 1; // this.status = ! this.status;
-
+        _this.delta = 1;
         console.log(response.data);
       });
     },
@@ -2034,8 +2034,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.post('/' + this.type + '/' + this.issueId + '/dislike').then(function (response) {
-        _this2.delta = -1; // this.status = ! this.status;
-
+        _this2.delta = -1;
         console.log(response.data);
       });
     }
@@ -37447,7 +37446,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("img", {
-      attrs: { src: _vm.imageLink, width: "25" },
+      attrs: { src: !(function webpackMissingModule() { var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), width: "25" },
       on: { click: _vm.favoriteIssue }
     })
   ])

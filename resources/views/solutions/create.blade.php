@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <form method="POST" action="/issues/{{ $issue->id }}/solutions/store" enctype="multipart/form-data">
+        <form method="POST" action="issues/{{ $issue->id }}/solutions/store" enctype="multipart/form-data">
             <div class="row col-10 offset-2">
                 @csrf
 
